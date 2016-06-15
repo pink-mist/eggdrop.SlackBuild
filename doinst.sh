@@ -23,4 +23,4 @@ preserve_perms() {
 }
 
 preserve_perms etc/rc.d/rc.eggdrop.new
-config /opt/eggdrop-@VER@/eggdrop.conf.new
+preserve_perms opt/eggdrop-@VER@/eggdrop.conf.new
