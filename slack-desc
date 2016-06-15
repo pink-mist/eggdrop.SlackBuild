@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+       |-----handy-ruler------------------------------------------------------|
+eggdrop: eggdrop (world's most popular open source irc bot)
+eggdrop:
+eggdrop: Eggdrop is the world's most popular Open Source IRC bot, designed for
+eggdrop: flexibility and ease of use. Eggdrop was originally developed by
+eggdrop: Robey Pointer; however, he no longer works on Eggdrop so please do
+eggdrop: not contact him for help solving a problem or bug.
+eggdrop:
+eggdrop: Website: http://www.eggheads.org/
+eggdrop: Wiki: http://eggwiki.org/Main_Page
+eggdrop:
+eggdrop:
