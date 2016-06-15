@@ -31,6 +31,8 @@ TAG=${TAG:-_SBo}
 EGG_UID=${EGG_UID:-325}
 EGG_GID=${EGG_GID:-325}
 EGG_USER=${EGG_USER:-eggdrop}
+EGG_SSLCERT=${EGG_SSLCERT:-no}
+EGG_HANDLEN=${EGG_HANDLEN:-32}
 
 # Automatically determine the architecture we're building on:
 if [ -z "$ARCH" ]; then
@@ -81,12 +83,19 @@ patch -p1 < $CWD/mem.c.diff
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 ./configure \
+  --with-handlen=$EGG_HANDLEN \
   --build=$ARCH-slackware-linux
 
 # Compile the application and install it into the $PKG directory
 make config
 make
 make install DEST=$PKG/opt/$PRGNAM-$VERSION
+
+# If EGG_SSLCERT = yes, run make sslcert too
+if [ "$EGG_SSLCERT" = "yes" ]
+then
+	make sslcert DEST=$PKG/opt/$PRGNAM-$VERSION
+fi
 
 # Strip binaries and libraries
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
