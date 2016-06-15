@@ -114,6 +114,7 @@ cat $CWD/README > $PKG/usr/doc/$PRGNAM-$VERSION/README.SBo
 sed -e "s%#! /path/to/executable/eggdrop%#!/opt/$PRGNAM-$VERSION/eggdrop%" \
   $PKG/opt/$PRGNAM-$VERSION/eggdrop.conf > $PKG/opt/$PRGNAM-$VERSION/eggdrop.conf.new
 rm $PKG/opt/$PRGNAM-$VERSION/eggdrop.conf
+chmod 0755 $PKG/opt/$PRGNAM-$VERSION/eggdrop.conf.new
 
 # Copy the slack-desc and doinst.sh into ./install
 mkdir -p $PKG/install
