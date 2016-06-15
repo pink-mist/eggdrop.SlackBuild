@@ -28,6 +28,10 @@ SHA1=${SHA1:-5fe4cc9792d2386caaed0d5ac8712ce545451069}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
+EGG_UID=${EGG_UID:-325}
+EGG_GID=${EGG_GID:-325}
+EGG_USER=${EGG_USER:-eggdrop}
+
 # Automatically determine the architecture we're building on:
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -95,10 +99,20 @@ cp -a \
   doc help \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+cat $CWD/README > $PKG/usr/doc/$PRGNAM-$VERSION/README.SBo
 
-# Copy the slack-desc into ./install
+# Copy the slack-desc and doinst.sh into ./install
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
+sed -e "s/@VER@/$VERSION/" \
+  $CWD/doinst.sh > $PKG/install/doinst.sh
+
+# Install init script
+mkdir -p $PKG/etc/rc.d
+sed -e "s/@USER@/$EGG_USER/" \
+  -e "s/@VER@/$VERSION/" \
+  $CWD/rc.$PRGNAM > $PKG/etc/rc.d/rc.$PRGNAM.new
+chmod 0755 $PKG/etc/rc.d/rc.$PRGNAM.new
 
 # Make the package
 cd $PKG

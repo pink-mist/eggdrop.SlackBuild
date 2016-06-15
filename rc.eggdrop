@@ -1,0 +1,54 @@
+#!/bin/sh
+#
+# eggdrop startup script for Slackware
+
+USER="@USER@"
+EGGDROP_DIR="/opt/eggdrop-@VER@"
+PIDFILE="$EGGDROP_DIR/eggdrop.pid"
+PID=`cat $PIDFILE 2>/dev/null`
+
+eggdrop_start() {
+  echo "Starting eggdrop."
+  su - $USER -c "$EGGDROP_DIR/eggdrop.conf"
+}
+
+eggdrop_stop() {
+  echo -n "Stopping eggdrop..."
+  kill -TERM $PID 2>/dev/null
+  echo " done."
+}
+
+eggdrop_reload() {
+	echo -n "Sending signal to eggdrop to reload its configuration..."
+	if kill -CHLD $PID 2>/dev/null; then
+		kill -HUP $PID
+		echo " done."
+	else
+		echo "eggdrop doesn't seem to be running."
+		exit 1
+	fi
+}
+
+eggdrop_restart() {
+  eggdrop_stop
+  sleep 1
+  eggdrop_start
+}
+
+case "$1" in
+  start)
+    eggdrop_start
+    ;;
+  stop)
+    eggdrop_stop
+    ;;
+  restart)
+    eggdrop_restart
+    ;;
+  reload)
+	eggdrop_reload
+	;;
+  *)
+    echo "Usage: $0 {start|stop|restart|reload}"
+    exit 1
+esac
