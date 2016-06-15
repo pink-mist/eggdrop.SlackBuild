@@ -101,6 +101,11 @@ cp -a \
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 cat $CWD/README > $PKG/usr/doc/$PRGNAM-$VERSION/README.SBo
 
+# Make sure the eggdrop.conf doesn't clobber an already existing one
+sed -e "s%#! /path/to/executable/eggdrop%#!/opt/$PRGNAM-$PVERSION/eggdrop%" \
+  $PKG/opt/$PRGNAM-$VERSION/eggdrop.conf > $PKG/opt/$PRGNAM-$VERSION/eggdrop.conf.new
+rm $PKG/opt/$PRGNAM-$VERSION/eggdrop.conf
+
 # Copy the slack-desc and doinst.sh into ./install
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
