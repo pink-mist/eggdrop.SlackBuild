@@ -1,0 +1,30 @@
+SlackBuild for eggdrop 1.8.0_20160503
+
+You can export the EGG_HANDLEN environmental variable to set an allowed
+nicklength other than the default of 32 by specifying
+  EGG_HANDLEN=9
+when you run the script.
+
+Likewise, if your eggdrop user isn't named "eggdrop", specify its name like
+this:
+  EGG_USER="foobar"
+
+Speaking of the eggdrop user, you will need to add it:
+  groupadd -g 325 eggdrop
+  useradd -u 325 -g 325 -d /opt/eggdrop-1.8.0_20160503 eggdrop
+
+Before starting the eggdrop, you'll need to edit the configuration file for it
+in /opt/eggdrop-1.8.0/eggdrop.conf. It should be executable and point to the
+eggdrop binary in its #! line so that the /etc/rc.d/rc.eggdrop script will be
+able to run it. Also note that the pidfile should be called eggdrop.pid if you
+want the /etc/rc.d/rc.eggdrop script to be able to interact with it.
+
+It is suggested you add this to your /etc/rc.d/rc.local file:
+
+    # /etc/rc.d/rc.local
+    # ==================
+    if [ -x /etc/rc.d/rc.eggdrop ]; then
+        /etc/rc.d/rc.eggdrop start
+    fi
+
+that way, the eggdrop will start when you boot.
