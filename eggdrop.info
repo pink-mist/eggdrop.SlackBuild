@@ -1,5 +1,5 @@
 PRGNAM="eggdrop"
-VERSION="1.8.0"
+VERSION="1.8.0_20160503"
 HOMEPAGE="http://www.eggheads.org/"
 DOWNLOAD="https://github.com/eggheads/eggdrop/archive/5fe4cc9792d2386caaed0d5ac8712ce545451069/eggdrop-5fe4cc9792d2386caaed0d5ac8712ce545451069.tar.gz"
 MD5SUM="8888bf627ace27ea83a877551991d504"
