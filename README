@@ -13,6 +13,11 @@ Speaking of the eggdrop user, you will need to add it:
   groupadd -g 325 eggdrop
   useradd -u 325 -g 325 -d /opt/eggdrop-1.8.0_20160503 eggdrop
 
+One more variable to consider is
+  EGG_SSLCERT="yes"
+which, if set to "yes", will also run `make sslcert`, which is recommended if
+you plan to use your bot as a botnet hub.
+
 Before starting the eggdrop, you'll need to edit the configuration file for it
 in /opt/eggdrop-1.8.0/eggdrop.conf. It should be executable and point to the
 eggdrop binary in its #! line so that the /etc/rc.d/rc.eggdrop script will be
