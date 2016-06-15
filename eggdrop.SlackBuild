@@ -129,6 +129,10 @@ sed -e "s/@USER@/$EGG_USER/" \
   $CWD/rc.$PRGNAM > $PKG/etc/rc.d/rc.$PRGNAM.new
 chmod 0755 $PKG/etc/rc.d/rc.$PRGNAM.new
 
+# Give it the correct ownership
+chown -R $EGG_USER:eggdrop $PKG/opt/$PRGNAM-$VERSION
+chmod 0700 $PKG/opt/$PRGNAM-$VERSION
+
 # Make the package
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}
